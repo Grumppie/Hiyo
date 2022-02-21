@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 12,
               ),
-              ListView(
+              Column(
                 children: data.map((e) => e).toList(),
               )
             ],
