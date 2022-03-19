@@ -36,7 +36,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  final items = ['food', 'travel', 'shopping'];
+  final items = ['Food & Drinks', 'Travel', 'Shopping','Gifts'];
   String? value;
   TextEditingController amountController = TextEditingController();   //add class and object to store this variables
   TextEditingController dateController = TextEditingController();   //store the terminal info in object
@@ -49,6 +49,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           style: TextStyle(
               //fontWeight: FontWeight.bold,
               color: Colors.black87),
+              //color:Colors.white,
         ),
       );
 
@@ -60,6 +61,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+          
             //Date
             Container(
               margin: EdgeInsets.fromLTRB(10, 30, 50, 0),
@@ -84,13 +86,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               margin: EdgeInsets.fromLTRB(10, 10, 50, 0),
               child: TextFormField(
                 controller: amountController,
+                
                 decoration: const InputDecoration(
+                  
                   fillColor: Colors.brown,
                   focusColor: Colors.black,
+                  hoverColor: Colors.blue,
                   icon: const Icon(Icons.money),
                   hintText: 'Enter amount',
                   labelText: 'Amount',
                 ),
+                
 
                 // next 3 lines of code are to open numerical keyboard, and not character keyboard
                 // so that parsing amount input(text) into num wont throw exception
@@ -105,22 +111,30 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
               ),
             ),
-
+            
+            const SizedBox(
+             
+             height:110.0,
+              ),
             //category
             Container(
               margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               decoration: BoxDecoration(
+                color: Colors.purple,
+                
                 border: Border.all(
-                  color: Colors.blueAccent,
+                  //color: Colors.blueAccent,
                   width: 2,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Center(
                 child: DropdownButtonHideUnderline(
+                  
                   child: DropdownButton<String>(
                     hint: Text("Select Category"),
+                    dropdownColor: Colors.purple,
                     isExpanded: true,
                     value: value,
                     items: items.map(buildMenuItem).toList(),
@@ -131,7 +145,10 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
               ),
             ),
-
+            const SizedBox(
+             
+             height: 110.0,
+              ),
             //Save
             Container(
               //height: 50,
@@ -146,14 +163,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                 child: TextButton(
                   child: Text("Save", style: TextStyle(fontSize: 15)),
                   style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.pink),
                     // margin: EdgeInsets.all(100),
                     padding:
                         MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(15)),
-                    foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.0),
-                            side: BorderSide(color: Colors.red))),
+                            //side: BorderSide(color: Colors.red)
+                            )),
                   ),
                   onPressed: () {
                     // print(dateController.text);
