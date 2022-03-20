@@ -20,8 +20,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xffd4f1f4),
+        backgroundColor: Color(0xff1d2473),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xffff007f),
           onPressed: () async {
             final expanses = await Navigator.push(
               context,
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
               ),
             );
             setState(() {
-              data.add(Expense(date:expanses.date,amount:expanses.amount,category:expanses.category,));
+              data.add(Expense(date:expanses.date,amount:expanses.amount,category:expanses.category,title: "sheess",subtitle: "sheeeeesh",));
               remaining += int.parse(expanses.amount);
             });
           },
@@ -78,7 +79,7 @@ class _HomeState extends State<Home> {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Color(0xff189ab4),
+                  color: Color(0xff190933),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 constraints: BoxConstraints(
