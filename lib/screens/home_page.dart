@@ -133,6 +133,7 @@ class _HomeState extends State<Home> {
               Column(
                 children: data.map((e) => e).toList(),
               )
+              
             ],
           ),
         )),
