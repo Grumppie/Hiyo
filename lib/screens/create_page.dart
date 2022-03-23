@@ -13,7 +13,7 @@ class CreatePage extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: Text(appTitle),
-          backgroundColor: Color(0xff303bba),
+          backgroundColor: Color(0xff190947),//0xff190933
         ),
         body: MyCustomForm(),
       ),
@@ -34,6 +34,21 @@ class MyCustomForm extends StatefulWidget {
 
 // Create a corresponding State class, which holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
