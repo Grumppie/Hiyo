@@ -15,8 +15,6 @@ class create_page extends StatelessWidget {
 
   get floatingActionButtonLocation => null;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
