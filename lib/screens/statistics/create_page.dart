@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 
-class create_page extends StatelessWidget {
+class StatsPage extends StatelessWidget {
   //const HomePage({ Key? key }) : super(key: key);
   Map<String,double> dataMap={
     "Food":5,
