@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
                   ),
                   SingleChildScrollView(
                     child: Column(
-                      children: data.map((e) => e).toList(),
+                      // children: data.map((e) => e).toList(),
                     ),
                   ),
                 ],
