@@ -21,14 +21,6 @@ class StatsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff1d2473),
-      appBar: AppBar(
-        title:Text("Statistics"),
-        centerTitle: true,
-        backgroundColor: Color(0xff303bba),
-        brightness: Brightness.dark,
-      ),
-
-      
 
       body: Column(
         

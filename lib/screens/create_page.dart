@@ -5,17 +5,17 @@ import 'package:hiyo/widget.expense.dart';
 import 'package:flutter/services.dart';
 
 class CreatePage extends StatelessWidget {
+
+  List data;
+  CreatePage({Key? key, required this.data}) : super(key: key){}
+
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'My Transactions';
     return MaterialApp(
-      title: appTitle,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(appTitle),
-          backgroundColor: Color(0xff190947),//0xff190933
-        ),
-        body: MyCustomForm(),
+
+        body: MyCustomForm(data: data,),
       ),
     );
   }
@@ -23,18 +23,25 @@ class CreatePage extends StatelessWidget {
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
+  List data;
+
+  MyCustomForm({Key? key, required this.data});
+
   @override
   // 123504
   // 192.168.25.1:8090/httpclient.html
   MyCustomFormState createState() {
-    return MyCustomFormState();
-    State<StatefulWidget> createState() => new MyCustomFormState();
+    return MyCustomFormState(data: data);
   }
 }
 
 // Create a corresponding State class, which holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
   DateTime selectedDate = DateTime.now();
+
+  List data;
+
+  MyCustomFormState({Key? key, required this.data});
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -249,11 +256,16 @@ class MyCustomFormState extends State<MyCustomForm> {
                         Scaffold.of(context).showSnackBar(
                             SnackBar(content: Text('Data is in processing.')));
 
-                        Navigator.of(context, rootNavigator: true).pop(Expense(
-                          date: dateController.text,
-                          amount: amountController.text,
-                          category: value,
-                        ));
+                        // Navigator.of(context, rootNavigator: true).pop(Expense(
+                        //   date: dateController.text,
+                        //   amount: amountController.text,
+                        //   category: value,
+                        // ));
+
+                        setState(() {
+                          Expense e = Expense(date: dateController.text,amount: amountController.text,category: value,title: amountController.text,subtitle: value,);
+                          data.add(e);
+                        });
                       }
                     },
                   ),
