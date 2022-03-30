@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'signup.dart';
+import 'login.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class SignIn extends StatelessWidget {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 60,
+                            height: 130,
                           ),
                           Text(
                             'New here ?',
@@ -54,29 +56,45 @@ class SignIn extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
-                          Text(
-                            "Sign Up!",
-                            style: TextStyle(
-                              fontSize: 36,
-                              color: Colors.pink,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(9.0),
-                            child: Text(
-                              "C'mon lets manage your expense",
+                          new TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Welcome()));
+                            },
+                            child: new Text(
+                              "Sign Up",
                               style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.white,
+                                fontSize: 36,
+                                color: Colors.pink,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
+                          // Text(
+                          //   "Sign Up!",
+                          //   style: TextStyle(
+                          //     fontSize: 36,
+                          //     color: Colors.pink,
+                          //     fontWeight: FontWeight.bold,
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.all(9.0),
+                          //   child: Text(
+                          //     "C'mon lets manage your expense",
+                          //     style: TextStyle(
+                          //       fontSize: 22,
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
@@ -99,7 +117,7 @@ class SignIn extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: 40,
+                          height: 100,
                         ),
                         Text(
                           'Returning ?',
@@ -112,31 +130,40 @@ class SignIn extends StatelessWidget {
                         Align(
                             alignment: Alignment.center,
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                              margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Column(
                                 children: [
-                                  Text(
-                                    "Sign In!",
-                                    style: TextStyle(
-                                      fontSize: 36,
-                                      color: Colors.pink,
-                                      fontWeight: FontWeight.bold,
+                                  new TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  WelcomeBack()));
+                                    },
+                                    child: new Text(
+                                      "Sign In",
+                                      style: TextStyle(
+                                        fontSize: 36,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 25,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      "Let's see if there are any holes in your pocket ;)",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 10),
+                                  //   child: Text(
+                                  //     "Let's see if there are any holes in your pocket ;)",
+                                  //     style: TextStyle(
+                                  //       fontSize: 20,
+                                  //       color: Colors.white,
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ))
