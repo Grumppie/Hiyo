@@ -15,8 +15,6 @@ class StatsPage extends StatelessWidget {
 
   get floatingActionButtonLocation => null;
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +48,7 @@ class StatsPage extends StatelessWidget {
  
             legendTextStyle: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Colors.white,
         ),),
             chartValuesOptions: ChartValuesOptions(showChartValuesInPercentage: true,
             showChartValueBackground: true,
@@ -65,22 +63,14 @@ class StatsPage extends StatelessWidget {
           ),
         
         ),
-        Column( children: [
-         Align(
-          alignment: Alignment.centerRight,
-          child: new FloatingActionButton(
-              child: const Icon(Icons.skip_next),
-              onPressed: () {
-              }),
-        ),
-        ],),
         
-       
+        
+      SizedBox(height: 50,),
       
       
       
       
-              Row(
+      Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
@@ -91,19 +81,22 @@ class StatsPage extends StatelessWidget {
             color: const Color(0xffff0000),
           ),
           child: Center(
+            
             child: Text(
-                  'SIGN UP ',
+                  'your most\n\spent was\n\starbucks!',
                   style: TextStyle(
                     fontFamily: 'Arial',
-                    fontSize: 10,
-                    color: Colors.white,
-                    height: 10,
+                    fontSize: 18,
+                    color: Colors.black,
+                    //height: 10,
                     
                   ),
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.justify,
+            ),
             ),
           ),
-        ),
+      
+        
 
         Container(
           width: 130.0,
@@ -114,16 +107,18 @@ class StatsPage extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-                  'SIGN UP'
-                  'bjhd',
+                  
+                   'your most,\n\spent was \n\ola',
+                  
+                  
                   style: TextStyle(
                     fontFamily: 'Arial',
-                    fontSize: 10,
-                    color: Colors.white,
-                    height: 10,
+                    fontSize: 18,
+                    color: Colors.black,
+                    //height: 10,
                     
                   ),
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -136,23 +131,23 @@ class StatsPage extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-                  'SIGN UP'
-                  'bjhd',
+                  'your most \n\ spent was \n\on movies',
                   style: TextStyle(
                     fontFamily: 'Arial',
-                    fontSize: 10,
-                    color: Colors.white,
-                    height: 10,
+                    fontSize: 18,
+                    color: Colors.black,
+                    //height: 10,
                     
                   ),
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
             ),
           ),
         ),
                 ],
-              )
-                ]  ),
-    );
+              ),
+                ], 
+                ),
+  );
   }
 }
 
