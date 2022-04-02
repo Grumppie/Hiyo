@@ -1,13 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:hiyo/screens/home_page.dart';
-import 'package:hiyo/widget.expense.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import '../Providers/expense_provider.dart';
 
 class CreatePage extends StatelessWidget {
 
-  List data;
-  CreatePage({Key? key, required this.data}) : super(key: key){}
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class CreatePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
 
-        body: MyCustomForm(data: data,),
+        body: MyCustomForm(),
       ),
     );
   }
@@ -23,25 +22,18 @@ class CreatePage extends StatelessWidget {
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-  List data;
-
-  MyCustomForm({Key? key, required this.data});
 
   @override
   // 123504
   // 192.168.25.1:8090/httpclient.html
   MyCustomFormState createState() {
-    return MyCustomFormState(data: data);
+    return MyCustomFormState();
   }
 }
 
 // Create a corresponding State class, which holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
   DateTime selectedDate = DateTime.now();
-
-  List data;
-
-  MyCustomFormState({Key? key, required this.data});
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -81,12 +73,13 @@ class MyCustomFormState extends State<MyCustomForm> {
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff1d2473),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               //Date
               Container(
@@ -252,20 +245,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a Snackbar.
-                        Scaffold.of(context).showSnackBar(
-                            SnackBar(content: Text('Data is in processing.')));
-
-                        // Navigator.of(context, rootNavigator: true).pop(Expense(
-                        //   date: dateController.text,
-                        //   amount: amountController.text,
-                        //   category: value,
-                        // ));
-
-                        setState(() {
-                          Expense e = Expense(date: dateController.text,amount: amountController.text,category: value,title: amountController.text,subtitle: value,);
-                          data.add(e);
-                        });
+                        return context.read<MainExpenseList>().addExpenses(date: dateController,amount: amountController,category: value);
                       }
                     },
                   ),

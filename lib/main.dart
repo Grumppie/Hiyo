@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hiyo/Providers/expense_provider.dart';
 import 'package:hiyo/screens/Authentication/auth_home.dart';
 import 'package:hiyo/screens/home_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:hiyo/screens/create_page.dart';
 import 'package:hiyo/screens/statistics/create_page.dart';
-
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => MainExpenseList()),
+    ],
+    child: MaterialApp(
       debugShowCheckedModeBanner: false,
       home: MyApp(),
-    )
-  );
+    ),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -23,7 +27,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   final items = [
     Icon(
       Icons.home,
@@ -57,27 +60,31 @@ class _MyAppState extends State<MyApp> {
   final Screens = [
     Home(),
     SignIn(),
-    CreatePage(data: []),
-    StatsPage()
+    CreatePage(),
+    StatsPage(),
   ];
 
-  PageTitle(index){
-    switch(index){
-      case 0:{
-        return Center(child: Text("Hiyo"));
-      }
-      case 1:{
-        return Center(child: Text("Authentication"));
-      }
-      case 2:{
-        return Center(child: Text("Add Transactions"));
-      }
-      case 3:{
-        return Center(child: Text("My Transactions"));
-      }
+  PageTitle(index) {
+    switch (index) {
+      case 0:
+        {
+          return Center(child: Text("Hiyo"));
+        }
+      case 1:
+        {
+          return Center(child: Text("Authentication"));
+        }
+      case 2:
+        {
+          return Center(child: Text("Add Transactions"));
+        }
+      case 3:
+        {
+          return Center(child: Text("My Transactions"));
+        }
     }
   }
-
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,36 +94,37 @@ class _MyAppState extends State<MyApp> {
         top: false,
         child: ClipRect(
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: PageTitle(currentIndex),
-              backgroundColor: Color(0xff190947),//0xff190933
+              backgroundColor: Color(0xff190947), //0xff190933
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-              body: Screens[currentIndex],
-              bottomNavigationBar: Theme(
-                data: Theme.of(context).copyWith(
-                    iconTheme: IconThemeData(color: Colors.white)
-                ),
-                child: CurvedNavigationBar(
-                  color: Color(0xff190933),
-                  backgroundColor: Colors.transparent,
-                  buttonBackgroundColor: buttonColor(currentIndex),
-                  height: 70,
-                  animationCurve: Curves.easeInOut,
-                  animationDuration: Duration(milliseconds: 300),
-
-                  index: currentIndex,
-                  items: items,
-                  onTap: (index) => setState(() => {
-                    currentIndex = index,
-                    // print(index)
-                  }),
-                ),
+            body: Screens[currentIndex],
+            bottomNavigationBar: Theme(
+              data: Theme.of(context)
+                  .copyWith(iconTheme: IconThemeData(color: Colors.white)),
+              child: CurvedNavigationBar(
+                color: Color(0xff190933),
+                backgroundColor: Colors.transparent,
+                buttonBackgroundColor: buttonColor(currentIndex),
+                height: 70,
+                animationCurve: Curves.easeInOut,
+                animationDuration: Duration(milliseconds: 300),
+                index: currentIndex,
+                items: items,
+                onTap: (index) => setState(() => {
+                      currentIndex = index,
+                      // print(index)
+                    }),
               ),
+            ),
           ),
         ),
       ),
     );
   }
+
 }
+
