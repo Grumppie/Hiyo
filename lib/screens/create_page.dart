@@ -53,10 +53,9 @@ class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts'];
   String? value;
-  TextEditingController amountController =
-      TextEditingController(); //add class and object to store this variables
-  TextEditingController dateController =
-      TextEditingController(); //store the terminal info in object
+
+  TextEditingController amountController = TextEditingController(); //add class and object to store this variables
+  TextEditingController dateController = TextEditingController(); //store the terminal info in object
 
   @override
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
@@ -104,12 +103,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                           style: TextStyle(color: Colors.white),
                           controller: dateController,
                           decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
-                                  color: Color(0xff7b6f6f),
-                                )),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 3),
+                            ),
+                            // border: const OutlineInputBorder(),
+                            // enabledBorder: OutlineInputBorder(
+                            //     borderRadius: BorderRadius.circular(5.0),
+                            //     borderSide: BorderSide(
+                            //       color: Color(0xff7b6f6f),
+                            //     )),
                             icon: const Icon(
                               Icons.calendar_today_rounded,
                               color: Colors.white,
@@ -118,16 +120,19 @@ class MyCustomFormState extends State<MyCustomForm> {
                             hintStyle: TextStyle(color: Color(0xff7b6f6f)),
                             labelText: 'Date',
                             labelStyle: TextStyle(color: Color(0xff7b6f6f)),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide: BorderSide(
-                                color: Color(0xff7b6f6f),
-                              ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 3),
                             ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderRadius: BorderRadius.circular(5.0),
+                            //   borderSide: BorderSide(
+                            //     color: Color(0xff7b6f6f),
+                            //   ),
+                            // ),
                           ),
                           validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid date';
+                            if (value!.isEmpty) {
+                              return 'Please select date.';
                             }
                             return null;
                           },
@@ -141,11 +146,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                           controller: amountController,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5.0),
-                                borderSide: BorderSide(
-                                  color: Color(0xff7b6f6f),
-                                )),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 3),
+                            ),
+                            // enabledBorder: OutlineInputBorder(
+                            //     borderRadius: BorderRadius.circular(5.0),
+                            //     borderSide: BorderSide(
+                            //       color: Color(0xff7b6f6f),
+                            //     ),
+                            // ),
                             icon: const Icon(
                               Icons.account_balance_wallet_outlined,
                               color: Colors.white,
@@ -154,12 +163,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                             hintStyle: TextStyle(color: Color(0xff7b6f6f)),
                             labelText: 'Amount',
                             labelStyle: TextStyle(color: Color(0xff7b6f6f)),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                              borderSide: BorderSide(
-                                color: Color(0xff7b6f6f),
-                              ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black, width: 3),
                             ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderRadius: BorderRadius.circular(5.0),
+                            //   borderSide: BorderSide(
+                            //     color: Color(0xff7b6f6f),
+                            //   ),
+                            // ),
                           ),
 
                           // next 3 lines of code are to open numerical keyboard, and not character keyboard
@@ -170,7 +182,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                           ],
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return 'Please enter valid amount';
+                              return 'Please enter amount.';
                             }
                             return null;
                           },
@@ -245,7 +257,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        return context.read<MainExpenseList>().addExpenses(date: dateController,amount: amountController,category: value);
+                        context.read<MainExpenseList>().addExpenses(date: dateController,amount: amountController,category: value);
                       }
                     },
                   ),
