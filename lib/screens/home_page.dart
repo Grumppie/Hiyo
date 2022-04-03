@@ -113,7 +113,7 @@ class Home extends StatelessWidget {
                     ),
                     SingleChildScrollView(
                       child: Column(
-                        children: context.watch<MainExpenseList>().getList().map((e) => e).toList(),
+                        children: Provider.of<MainExpenseList>(context, listen: true).getList().map((e) => e).toList(),
                       ),
                     ),
                   ],
