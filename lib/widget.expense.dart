@@ -9,44 +9,62 @@ class Expense extends StatelessWidget {
   Expense({this.date, this.amount, this.category, this.title, this.subtitle});
 
   Map categoryIcons = {
-    "food": Icon(
+    "Food & Drinks": Icon(
       Icons.fastfood_rounded,
       color: Colors.white,
     ),
-    "travel": Icon(
+    "Travel": Icon(
       Icons.airplanemode_active,
       color: Colors.white,
     ),
-    "shopping": Icon(
+    "Shopping": Icon(
       Icons.shopping_cart,
+      color: Colors.white,
+    ),
+    "Gifts":Icon(
+      Icons.card_giftcard_outlined,
       color: Colors.white,
     )
   };
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        elevation: 0,
-        child: ListTile(
-          title: Text(
-            "${date}",
-            style: TextStyle(color: Colors.white),
-          ),
-          subtitle: Text(
-            "${amount}",
-            style: TextStyle(color: Colors.white),
-          ),
-          leading: categoryIcons[category],
-          trailing: Text(
-            "${amount}",
-            style: TextStyle(color: Colors.white),
-          ),
-          selectedTileColor: Color(0xff190933),
-          selected: true,
-
-        ));
+    return Container(
+      color: Colors.blueGrey,
+      width: 200,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Center(child: categoryIcons[category]),
+          Text("$date"),
+          SizedBox(width: 5,),
+          Text("$amount"),
+        ],
+      ),
+    );
   }
 }
+
+// Card(
+// shape: RoundedRectangleBorder(
+// borderRadius: BorderRadius.circular(15.0),
+// ),
+// elevation: 0,
+// child: ListTile(
+// title: Text(
+// "${date}",
+// style: TextStyle(color: Colors.white),
+// ),
+// subtitle: Text(
+// "${amount}",
+// style: TextStyle(color: Colors.white),
+// ),
+// leading: categoryIcons[category],
+// trailing: Text(
+// "${amount}",
+// style: TextStyle(color: Colors.white),
+// ),
+// selectedTileColor: Color(0xff190933),
+// selected: true,
+//
+// ));
