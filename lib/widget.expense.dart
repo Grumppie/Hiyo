@@ -30,15 +30,20 @@ class Expense extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueGrey,
-      width: 200,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        color: Color(0xff190933),
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      width: double.infinity,
+      height: 76,
+      margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 18,horizontal: 18),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Center(child: categoryIcons[category]),
-          Text("$date"),
-          SizedBox(width: 5,),
-          Text("$amount"),
+          Text("$date",style: TextStyle(fontSize: 18,color: Colors.white),),
+          Text("$amount",style: TextStyle(fontSize: 18,color: Colors.white),),
         ],
       ),
     );
