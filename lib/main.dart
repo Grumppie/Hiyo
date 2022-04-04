@@ -84,7 +84,7 @@ class _MyAppState extends State<MyApp> {
         }
     }
   }
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
 
   @override
   Widget build(BuildContext context) {
