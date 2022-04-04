@@ -66,9 +66,9 @@ class SignIn extends StatelessWidget {
                         Container(
                           margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                           child: new TextButton(
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: Size.fromHeight(350), // fromHeight use double.infinity as width and 40 is the height
-                              ),
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size.fromHeight(350), // fromHeight use double.infinity as width and 40 is the height
+                            ),
                             onPressed: () {
                               Navigator.push(
                                   context,
