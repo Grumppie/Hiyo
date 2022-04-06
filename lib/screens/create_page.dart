@@ -101,7 +101,19 @@ class MyCustomFormState extends State<MyCustomForm> {
                         margin: EdgeInsets.fromLTRB(10, 30, 50, 0),
                         child: TextFormField(
                           style: TextStyle(color: Colors.white),
-                          controller: dateController,
+                          onTap: () async{
+                            DateTime? newDate = await showDatePicker(
+                              context: context,
+                              initialDate: selectedDate,
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2100),
+                            );
+
+                            if(newDate==null)return;
+                            setState(() {
+                              selectedDate = newDate;
+                            });
+                          },
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black, width: 3),
@@ -116,9 +128,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                               Icons.calendar_today_rounded,
                               color: Colors.white,
                             ),
-                            hintText: 'Enter Date',
-                            hintStyle: TextStyle(color: Color(0xff7b6f6f)),
-                            labelText: 'Date',
+                            hintText: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                            hintStyle: TextStyle(color: Color(0xffffffff)),
+                            labelText: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                             labelStyle: TextStyle(color: Color(0xff7b6f6f)),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black, width: 3),
@@ -130,12 +142,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                             //   ),
                             // ),
                           ),
-                          validator: (String? value) {
-                            if (value!.isEmpty) {
-                              return 'Please select date.';
-                            }
-                            return null;
-                          },
+
                         ),
                       ),
 
@@ -257,7 +264,8 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        context.read<MainExpenseList>().addExpenses(date: dateController.text,amount: amountController.text,category: value);
+                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category: value);
+                        Provider.of<MainExpenseList>(context,listen: false).changePageIndex(0);
                       }
                     },
                   ),

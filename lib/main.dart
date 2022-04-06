@@ -96,26 +96,26 @@ class _MyAppState extends State<MyApp> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              title: PageTitle(currentIndex),
+              title: PageTitle(Provider.of<MainExpenseList>(context,listen: true).getPageIndex()),
               backgroundColor: Color(0xff190947), //0xff190933
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-            body: Screens[currentIndex],
+            body: Screens[Provider.of<MainExpenseList>(context,listen: true).getPageIndex()],
             bottomNavigationBar: Theme(
               data: Theme.of(context)
                   .copyWith(iconTheme: IconThemeData(color: Colors.white)),
               child: CurvedNavigationBar(
                 color: Color(0xff190933),
                 backgroundColor: Colors.transparent,
-                buttonBackgroundColor: buttonColor(currentIndex),
+                buttonBackgroundColor: buttonColor(Provider.of<MainExpenseList>(context,listen: true).getPageIndex()),
                 height: 70,
                 animationCurve: Curves.easeInOut,
                 animationDuration: Duration(milliseconds: 300),
-                index: currentIndex,
+                index: Provider.of<MainExpenseList>(context,listen: true).getPageIndex(),
                 items: items,
                 onTap: (index) => setState(() => {
-                      currentIndex = index,
+                      Provider.of<MainExpenseList>(context,listen: false).changePageIndex(index),
                       // print(index)
                     }),
               ),
