@@ -6,15 +6,6 @@ import 'package:provider/provider.dart';
 import '../Providers/expense_provider.dart';
 
 class Home extends StatelessWidget {
-  List<Widget> data = [
-    Expense(
-      date: "Work In Progress",
-      amount: 404,
-      category: "food",
-      title: 404,
-      subtitle: 100,
-    ),
-  ];
   num goal = 5000;
   num remaining = 0;
 
@@ -104,7 +95,7 @@ class Home extends StatelessWidget {
                                 fontWeight: FontWeight.normal),
                           )),
                       Text(
-                        "$remaining",
+                        "${Provider.of<MainExpenseList>(context,listen: true).getRemaining()}",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 45.0,
