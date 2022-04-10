@@ -4,9 +4,10 @@ import 'package:pie_chart/pie_chart.dart';
 class StatsPage extends StatelessWidget {
   //const HomePage({ Key? key }) : super(key: key);
   Map<String, double> dataMap = {
-    "Food": 4,
-    "Education": 3,
-    "Bills": 2,
+    "Food & Drinks": 4,
+    "Travel": 3,
+    "Shopping": 2,
+    "Gifts":3,
     "Others": 2,
   };
 
@@ -38,12 +39,12 @@ class StatsPage extends StatelessWidget {
             //child:
             child: PieChart(
               dataMap: dataMap,
-              chartRadius: MediaQuery.of(context).size.width / 3.6,
+              chartRadius: MediaQuery.of(context).size.width / 3,
               chartType: ChartType.ring,
               ringStrokeWidth: 32,
               centerText: "spending",
               legendOptions: const LegendOptions(
-                legendShape: BoxShape.rectangle,
+                legendShape: BoxShape.circle,
                 legendPosition: LegendPosition.bottom,
                 showLegends: true,
                 showLegendsInRow: true,
@@ -70,8 +71,8 @@ class StatsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                width: 130.0,
-                height: 140.0,
+                width: 110.0,
+                height: 130.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.0),
                   color: const Color(0xffff0000),
@@ -90,8 +91,8 @@ class StatsPage extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 130.0,
-                height: 140.0,
+                width: 110.0,
+                height: 130.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.0),
                   color: const Color(0xffffff00),
@@ -110,8 +111,8 @@ class StatsPage extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 130.0,
-                height: 140.0,
+                width: 110.0,
+                height: 130.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.0),
                   color: const Color(0xff87ceeb),
