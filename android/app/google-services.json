@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "75993715992",
+    "project_id": "hiyo-49d6d",
+    "storage_bucket": "hiyo-49d6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75993715992:android:9fa332e04995620b243a6d",
+        "android_client_info": {
+          "package_name": "com.example.hiyo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75993715992-23aekmh07bplcsnimr759s7ph45t15pk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hiyo",
+            "certificate_hash": "8637ae7c634df27bd8ae140117ef5a0ec911ab4f"
+          }
+        },
+        {
+          "client_id": "75993715992-bjp0fv5eka3ccfq35om6fhovodb7nk3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPCbEzN9eC4wkwpvSBzZqDKtICDh2a1UA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75993715992-bjp0fv5eka3ccfq35om6fhovodb7nk3k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
