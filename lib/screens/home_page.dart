@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  num goal = 5000;
+  num limit = 0;
   num remaining = 0;
 
   TextEditingController _limitController = TextEditingController();

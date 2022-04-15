@@ -6,8 +6,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:hiyo/screens/create_page.dart';
 import 'package:hiyo/screens/statistics/create_page.dart';
 import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => MainExpenseList()),
@@ -20,7 +24,8 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   _MyAppState createState() => _MyAppState();

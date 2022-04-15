@@ -4,6 +4,7 @@ import 'package:hiyo/widget.expense.dart';
 class MainExpenseList with ChangeNotifier {
   List <Widget>_expense = [
   ];
+  num ?limit;
   num expenses = 0;
   int currentPageIndex = 0;
 
@@ -13,6 +14,10 @@ class MainExpenseList with ChangeNotifier {
 
   int getPageIndex() {
     return currentPageIndex;
+  }
+
+  num ?getLimit(){
+    return limit;
   }
 
   num getRemaining(){
@@ -36,5 +41,8 @@ class MainExpenseList with ChangeNotifier {
     notifyListeners();
   }
 
+  void setLimit(newLimit){
+    limit = newLimit;
+  }
 
 }
