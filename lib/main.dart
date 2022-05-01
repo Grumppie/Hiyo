@@ -44,11 +44,11 @@ class _MyAppState extends State<MyApp> {
       size: 35,
       color: Colors.white,
     ),
-    Icon(
-      Icons.person,
-      size: 35,
-      color: Colors.white,
-    ),
+    // Icon(
+    //   Icons.person,
+    //   size: 35,
+    //   color: Colors.white,
+    // ),
     Icon(
       Icons.add,
       size: 35,
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
 
   final Screens = [
     Home(),
-    SignIn(),
+    // SignIn(),
     CreatePage(),
     StatsPage(),
   ];
@@ -81,15 +81,15 @@ class _MyAppState extends State<MyApp> {
         {
           return Center(child: Text("Hiyo"));
         }
+      // case 1:
+      //   {
+      //     return Center(child: Text("Authentication"));
+      //   }
       case 1:
-        {
-          return Center(child: Text("Authentication"));
-        }
-      case 2:
         {
           return Center(child: Text("Add Transactions"));
         }
-      case 3:
+      case 2:
         {
           return Center(child: Text("My Transactions"));
         }

@@ -12,7 +12,7 @@ class Welcome extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  final AuthService _auth = AuthService();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -215,13 +215,6 @@ class Welcome extends StatelessWidget {
                                 const SnackBar(
                                     content: Text('Processing Data')),
                               );
-                              dynamic result = await _auth.signInAnon();
-                              if (result == null) {
-                                print("error");
-                              } else {
-                                print('signed in');
-                                print(result);
-                              }
                             }
                           }),
                     ),
