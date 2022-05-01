@@ -26,10 +26,9 @@ class SignIn extends StatelessWidget {
                 ),
               ),
             ),
-
-
-
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Align(
                   alignment: Alignment.center,
@@ -67,7 +66,8 @@ class SignIn extends StatelessWidget {
                           margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                           child: new TextButton(
                             style: ElevatedButton.styleFrom(
-                              minimumSize: Size.fromHeight(350), // fromHeight use double.infinity as width and 40 is the height
+                              minimumSize: Size.fromHeight(
+                                  350), // fromHeight use double.infinity as width and 40 is the height
                             ),
                             onPressed: () {
                               Navigator.push(
@@ -144,14 +144,14 @@ class SignIn extends StatelessWidget {
                           margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                           child: TextButton(
                             style: ElevatedButton.styleFrom(
-                              minimumSize: Size.fromHeight(300), // fromHeight use double.infinity as width and 40 is the height
+                              minimumSize: Size.fromHeight(
+                                  300), // fromHeight use double.infinity as width and 40 is the height
                             ),
                             onPressed: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          WelcomeBack()));
+                                      builder: (context) => WelcomeBack()));
                             },
                             child: new Text(
                               "Sign In",

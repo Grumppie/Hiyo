@@ -10,8 +10,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: "AIzaSyAPCbEzN9eC4wkwpvSBzZqDKtICDh2a1UA",
+      appId: "1:75993715992:android:9fa332e04995620b243a6d",
+      messagingSenderId: "XXX",
+      projectId: "hiyo-49d6d",
+    ),
+  );
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => MainExpenseList()),
@@ -24,8 +31,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -90,7 +96,6 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -101,26 +106,33 @@ class _MyAppState extends State<MyApp> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              title: PageTitle(Provider.of<MainExpenseList>(context,listen: true).getPageIndex()),
+              title: PageTitle(
+                  Provider.of<MainExpenseList>(context, listen: true)
+                      .getPageIndex()),
               backgroundColor: Color(0xff190947), //0xff190933
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-            body: Screens[Provider.of<MainExpenseList>(context,listen: true).getPageIndex()],
+            body: Screens[Provider.of<MainExpenseList>(context, listen: true)
+                .getPageIndex()],
             bottomNavigationBar: Theme(
               data: Theme.of(context)
                   .copyWith(iconTheme: IconThemeData(color: Colors.white)),
               child: CurvedNavigationBar(
                 color: Color(0xff190933),
                 backgroundColor: Colors.transparent,
-                buttonBackgroundColor: buttonColor(Provider.of<MainExpenseList>(context,listen: true).getPageIndex()),
+                buttonBackgroundColor: buttonColor(
+                    Provider.of<MainExpenseList>(context, listen: true)
+                        .getPageIndex()),
                 height: 70,
                 animationCurve: Curves.easeInOut,
                 animationDuration: Duration(milliseconds: 300),
-                index: Provider.of<MainExpenseList>(context,listen: true).getPageIndex(),
+                index: Provider.of<MainExpenseList>(context, listen: true)
+                    .getPageIndex(),
                 items: items,
                 onTap: (index) => setState(() => {
-                      Provider.of<MainExpenseList>(context,listen: false).changePageIndex(index),
+                      Provider.of<MainExpenseList>(context, listen: false)
+                          .changePageIndex(index),
                       // print(index)
                     }),
               ),
@@ -130,6 +142,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
 }
-
