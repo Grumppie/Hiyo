@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hiyo/Providers/expense_provider.dart';
+import 'package:hiyo/models/user.dart';
 import 'package:hiyo/services/auth.dart';
+import 'package:provider/provider.dart';
 import 'auth_home.dart';
 
 class WelcomeBack extends StatelessWidget {
@@ -209,8 +212,9 @@ class WelcomeBack extends StatelessWidget {
                           if (result == null) {
                             print("error");
                           } else {
+                            Provider.of<MainExpenseList>(context, listen: false)
+                                .setUser(AppUser(uid: result.uid));
                             print('signed in');
-                            print(result.uid);
                           }
                         }
                       }),

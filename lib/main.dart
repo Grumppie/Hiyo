@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hiyo/Providers/expense_provider.dart';
 import 'package:hiyo/screens/Authentication/auth_home.dart';
@@ -5,9 +6,12 @@ import 'package:hiyo/screens/home_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:hiyo/screens/create_page.dart';
 import 'package:hiyo/screens/statistics/create_page.dart';
+import 'package:hiyo/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'models/user.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -113,8 +117,12 @@ class _MyAppState extends State<MyApp> {
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-            body: Screens[Provider.of<MainExpenseList>(context, listen: true)
-                .getPageIndex()],
+            body: Provider.of<MainExpenseList>(context, listen: true)
+                        .getuser() !=
+                    null
+                ? Screens[Provider.of<MainExpenseList>(context, listen: true)
+                    .getPageIndex()]
+                : const SignIn(),
             bottomNavigationBar: Theme(
               data: Theme.of(context)
                   .copyWith(iconTheme: IconThemeData(color: Colors.white)),
