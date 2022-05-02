@@ -7,7 +7,7 @@ class StatsPage extends StatelessWidget {
     "Food & Drinks": 4,
     "Travel": 3,
     "Shopping": 2,
-    "Gifts":3,
+    "Gifts": 3,
     "Others": 2,
   };
 
@@ -33,7 +33,7 @@ class StatsPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 50,
+            height: 150,
           ),
           Container(
             //child:
@@ -67,49 +67,11 @@ class StatsPage extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          /*Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: 110.0,
-                height: 130.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.0),
-                  color: const Color(0xffff0000),
-                ),
-                child: Center(
-                  child: Text(
-                    'your most\n\spent was\n\starbucks!',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontSize: 18,
-                      color: Colors.black,
-                      //height: 10,
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-              ),
-              Container(
-                width: 110.0,
-                height: 130.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.0),
-                  color: const Color(0xffffff00),
-                ),
-                child: Center(
-                  child: Text(
-                    'your most,\n\spent was \n\ola',
-                    style: TextStyle(
-                      fontFamily: 'Arial',
-                      fontSize: 18,
-                      color: Colors.black,
-                      //height: 10,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
+              
+              
               Container(
                 width: 110.0,
                 height: 130.0,
@@ -131,7 +93,7 @@ class StatsPage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),'*/
         ],
       ),
     );

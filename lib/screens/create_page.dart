@@ -264,7 +264,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category: value);
+                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category:value);
                         Provider.of<MainExpenseList>(context,listen: false).changePageIndex(0);
                       }
                     },
