@@ -60,11 +60,11 @@ class _HomeState extends State<Home> {
                             )
                           ],
                         ),
-                        RaisedButton(onPressed: () async {
-                          await _auth.SignOut();
-                          Provider.of<MainExpenseList>(context, listen: false)
-                              .setUsernull();
-                        })
+                        // RaisedButton(onPressed: () async {
+                        //   await _auth.SignOut();
+                        //   Provider.of<MainExpenseList>(context, listen: false)
+                        //       .setUsernull();
+                        // })
                       ],
                     )),
                 SizedBox(
@@ -110,7 +110,9 @@ class _HomeState extends State<Home> {
                               fillColor: Colors.lightBlueAccent,
                               focusColor: Colors.lightBlueAccent,
                             ),
-                            controller: _limitController,
+                            controller: Provider.of<MainExpenseList>(context,
+                                    listen: true)
+                                .getMyLimit(),
                             enabled: _isEnabled,
                             style: TextStyle(
                                 color: Colors.white,
@@ -142,6 +144,9 @@ class _HomeState extends State<Home> {
                               setState(
                                 () {
                                   _isEnabled = false;
+                                  Provider.of<MainExpenseList>(context,
+                                          listen: false)
+                                      .changeMyLimit(_limitController);
                                 },
                               );
                             },

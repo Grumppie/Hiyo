@@ -15,14 +15,14 @@ import 'models/user.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-      apiKey: "AIzaSyAPCbEzN9eC4wkwpvSBzZqDKtICDh2a1UA",
-      appId: "1:75993715992:android:9fa332e04995620b243a6d",
-      messagingSenderId: "XXX",
-      projectId: "hiyo-49d6d",
-    ),
-  );
+  // await Firebase.initializeApp(
+  //   options: FirebaseOptions(
+  //     apiKey: "AIzaSyAPCbEzN9eC4wkwpvSBzZqDKtICDh2a1UA",
+  //     appId: "1:75993715992:android:9fa332e04995620b243a6d",
+  //     messagingSenderId: "XXX",
+  //     projectId: "hiyo-49d6d",
+  //   ),
+  // );
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => MainExpenseList()),
@@ -117,12 +117,8 @@ class _MyAppState extends State<MyApp> {
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-            body: Provider.of<MainExpenseList>(context, listen: true)
-                        .getuser() !=
-                    null
-                ? Screens[Provider.of<MainExpenseList>(context, listen: true)
-                    .getPageIndex()]
-                : const SignIn(),
+            body: Screens[Provider.of<MainExpenseList>(context, listen: true)
+                .getPageIndex()],
             bottomNavigationBar: Theme(
               data: Theme.of(context)
                   .copyWith(iconTheme: IconThemeData(color: Colors.white)),

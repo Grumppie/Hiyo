@@ -8,6 +8,7 @@ class MainExpenseList with ChangeNotifier {
   num? limit;
   num expenses = 0;
   int currentPageIndex = 0;
+  dynamic _Mylimit;
 
   AppUser _UserFromFirebaseUser(User? user) {
     return AppUser(uid: user?.uid);
@@ -23,6 +24,14 @@ class MainExpenseList with ChangeNotifier {
 
   List<Widget> getList() {
     return _expense;
+  }
+
+  dynamic getMyLimit() {
+    return _Mylimit;
+  }
+
+  void changeMyLimit(lim) {
+    _Mylimit = lim;
   }
 
   AppUser? getuser() {
