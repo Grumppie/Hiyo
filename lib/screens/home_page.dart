@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   TextEditingController _limitController = TextEditingController();
   bool _isEnabled = false;
 
-  final AuthService _auth = AuthService();
+  // final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {

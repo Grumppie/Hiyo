@@ -14,9 +14,9 @@ class MainExpenseList with ChangeNotifier {
     return AppUser(uid: user?.uid);
   }
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  AppUser? user = AppUser(uid: "muup4VK3WRhb6qUbefjZcpukpwE3");
+  // AppUser? user = AppUser(uid: "muup4VK3WRhb6qUbefjZcpukpwE3");
 
   // Stream<AppUser> get user {
   //   return _auth.authStateChanges().map(_UserFromFirebaseUser);
@@ -34,19 +34,19 @@ class MainExpenseList with ChangeNotifier {
     _Mylimit = lim;
   }
 
-  AppUser? getuser() {
-    return user;
-  }
+  // AppUser? getuser() {
+  //   return user;
+  // }
 
-  void setUser(uid) {
-    user = uid;
-    notifyListeners();
-  }
+  // void setUser(uid) {
+  //   user = uid;
+  //   notifyListeners();
+  // }
 
-  void setUsernull() {
-    user = null;
-    notifyListeners();
-  }
+  // void setUsernull() {
+  //   user = null;
+  //   notifyListeners();
+  // }
 
   int getPageIndex() {
     return currentPageIndex;
