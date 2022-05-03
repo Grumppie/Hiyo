@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  num limit = 0;
+  String limit = "";
   num remaining = 0;
 
   TextEditingController _limitController = TextEditingController();
@@ -76,11 +76,12 @@ class _HomeState extends State<Home> {
                     color: Color(0xff190933),
                   ),
                   padding: EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                  constraints: BoxConstraints(
-                    minWidth: 400,
-                    maxWidth: 400,
-                    minHeight: 180,
-                  ),
+                  // constraints: BoxConstraints(
+                  //   minWidth: 400,
+                  //   maxWidth: 400,
+                  //   minHeight: 180,
+                  // ),
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                   child: Column(
                     children: [
                       Align(
@@ -95,10 +96,10 @@ class _HomeState extends State<Home> {
                       ),
                       Column(
                         children: [
-                          TextField(
+                          TextFormField(
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "Rs. ",
                               hintStyle: TextStyle(color: Colors.white12),
                               enabledBorder: UnderlineInputBorder(
@@ -110,9 +111,14 @@ class _HomeState extends State<Home> {
                               fillColor: Colors.lightBlueAccent,
                               focusColor: Colors.lightBlueAccent,
                             ),
-                            controller: Provider.of<MainExpenseList>(context,
+                            initialValue: Provider.of<MainExpenseList>(context,
                                     listen: true)
                                 .getMyLimit(),
+                            // controller: Provider.of<MainExpenseList>(context,
+                            //         listen: true)
+                            //     .getMyLimit(),
+                            onChanged: (limit) =>
+                                setState(() => this.limit = limit),
                             enabled: _isEnabled,
                             style: TextStyle(
                                 color: Colors.white,
@@ -146,7 +152,7 @@ class _HomeState extends State<Home> {
                                   _isEnabled = false;
                                   Provider.of<MainExpenseList>(context,
                                           listen: false)
-                                      .changeMyLimit(_limitController);
+                                      .changeMyLimit(limit);
                                 },
                               );
                             },
