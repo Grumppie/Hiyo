@@ -47,7 +47,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts', 'Other'];
+  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts', 'Others'];
   String? value;
 
   TextEditingController amountController =

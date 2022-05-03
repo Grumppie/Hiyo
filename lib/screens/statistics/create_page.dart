@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:hiyo/Providers/expense_provider.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
 
-class StatsPage extends StatelessWidget {
+import '../../utils/user_simple_preferences.dart';
+import '../../widget.expense.dart';
+
+class StatsPage extends StatefulWidget {
+  @override
+  State<StatsPage> createState() => _StatsPageState();
+}
+
+class _StatsPageState extends State<StatsPage> {
   //const HomePage({ Key? key }) : super(key: key);
-  Map<String, double> dataMap = {
-    "Food & Drinks": 4,
-    "Travel": 3,
-    "Shopping": 2,
-    "Gifts": 3,
-    "Others": 2,
-  };
+
+  List<Expense>? expenseList = UserSimplePreferences.getExpenses();
+
+  late Map<String, double> dataMap;
+
+  @override
+  void initState() {
+    if (expenseList != null) {
+      dataMap = {
+        "Food & Drinks": expenseList
+            ?.where((e) => e.category == "Food & Drinks")
+            .toList()
+            .length as double,
+        "Travel": expenseList
+            ?.where((e) => e.category == "Travel")
+            .toList()
+            .length as double,
+        "Shopping": expenseList
+            ?.where((e) => e.category == "Shopping")
+            .toList()
+            .length as double,
+        "Gifts": expenseList
+            ?.where((e) => e.category == "Gifts")
+            .toList()
+            .length as double,
+        "Others": expenseList
+            ?.where((e) => e.category == "Others")
+            .toList()
+            .length as double,
+      };
+    } else {
+      dataMap = {
+        "Food & Drinks": 1,
+        "Travel": 1,
+        "Shopping": 1,
+        "Gifts": 1,
+        "Others": 1,
+      };
+    }
+  }
 
   get floatingActionButton => null;
 

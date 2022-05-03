@@ -32,7 +32,12 @@ class _HomeState extends State<Home> {
     if (expenseList != null) {
       Provider.of<MainExpenseList>(context, listen: false)
           .setExpenseList(expenseList);
+      // for (int i = 0; i < expenseList.length; i++) {
+      //   remaining += expenseList[i].amount as num;
+      // }
+      Provider.of<MainExpenseList>(context, listen: false).setRemaining();
     }
+
     // print(expenseList?[0].amount);
   }
 
@@ -68,7 +73,7 @@ class _HomeState extends State<Home> {
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
                             Text(
-                              "uknown user ",
+                              "unknown user ",
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )
