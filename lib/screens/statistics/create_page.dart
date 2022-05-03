@@ -103,31 +103,74 @@ class _StatsPageState extends State<StatsPage> {
                     showChartValues: true,
                     chartValueStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 23, 22, 22),
                     )),
               ),
             ),
             Container(
+              margin: EdgeInsets.all(40),
+              padding: EdgeInsets.all(10.0),
               child: Table(
-                  border: TableBorder
-                      .all(), // Allows to add a border decoration around your table
+                  defaultColumnWidth: FixedColumnWidth(150.0),
+                  border: TableBorder.all(
+                      color: Colors.white,
+                      style: BorderStyle.solid,
+                      width:
+                          1.5), // Allows to add a border decoration around your table
                   children: [
                     TableRow(children: [
-                      Text('Year'),
-                      Text('Lang'),
-                      Text('Author'),
+                      Text(
+                        'Category',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.yellowAccent),
+                      ),
+                      Text(
+                        'spent',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.yellowAccent),
+                      ),
                     ]),
                     TableRow(children: [
                       Text(
-                        '2011',
+                        'Shopping',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
-                      Text('Dart'),
-                      Text('Lars Bak'),
+                      Text(
+                        '66',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ]),
                     TableRow(children: [
-                      Text('1996'),
-                      Text('Java'),
-                      Text('James Gosling'),
+                      Text(
+                        'Travel',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        '200',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ]),
                   ]),
             )
