@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:hiyo/Providers/expense_provider.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:provider/provider.dart';
 
-class StatsPage extends StatelessWidget {
+import '../../utils/user_simple_preferences.dart';
+import '../../widget.expense.dart';
+
+class StatsPage extends StatefulWidget {
+  @override
+  State<StatsPage> createState() => _StatsPageState();
+}
+
+class _StatsPageState extends State<StatsPage> {
   //const HomePage({ Key? key }) : super(key: key);
-  Map<String, double> dataMap = {
-    "Food & Drinks": 4,
-    "Travel": 3,
-    "Shopping": 2,
-    "Gifts": 3,
-    "Others": 2,
+
+  List<Expense>? expenseList = UserSimplePreferences.getExpenses();
+
+  late Map<String, double> dataMap = {
+    "Food & Drinks": expenseList
+        ?.where((e) => e.category == "Food & Drinks")
+        .toList()
+        .length as double,
+    "Travel": expenseList?.where((e) => e.category == "Travel").toList().length
+        as double,
+    "Shopping": expenseList
+        ?.where((e) => e.category == "Shopping")
+        .toList()
+        .length as double,
+    "Gifts": expenseList?.where((e) => e.category == "Gifts").toList().length
+        as double,
+    "Others": expenseList?.where((e) => e.category == "Others").toList().length
+        as double,
   };
 
   get floatingActionButton => null;

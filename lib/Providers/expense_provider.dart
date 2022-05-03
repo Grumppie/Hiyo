@@ -60,6 +60,12 @@ class MainExpenseList with ChangeNotifier {
     return expenses;
   }
 
+  void setRemaining() {
+    for (int i = 0; i < _expense!.length; i++) {
+      expenses += int.parse(_expense![i].amount);
+    }
+  }
+
   void changePageIndex(int newIndex) {
     currentPageIndex = newIndex;
     notifyListeners();
@@ -73,15 +79,16 @@ class MainExpenseList with ChangeNotifier {
       title: date,
       subtitle: amount,
     ));
-    expenses += int.parse(amount);
     notifyListeners();
   }
 
   void setLimit(newLimit) {
     limit = newLimit;
+    notifyListeners();
   }
 
   void setExpenseList(List<Expense> expenseList) {
     _expense = expenseList;
+    notifyListeners();
   }
 }

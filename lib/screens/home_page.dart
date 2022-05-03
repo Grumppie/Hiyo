@@ -32,7 +32,12 @@ class _HomeState extends State<Home> {
     if (expenseList != null) {
       Provider.of<MainExpenseList>(context, listen: false)
           .setExpenseList(expenseList);
+      // for (int i = 0; i < expenseList.length; i++) {
+      //   remaining += expenseList[i].amount as num;
+      // }
+      Provider.of<MainExpenseList>(context, listen: false).setRemaining();
     }
+
     // print(expenseList?[0].amount);
   }
 
