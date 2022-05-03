@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
                             Text(
-                              "uknown user ",
+                              "unknown user ",
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )

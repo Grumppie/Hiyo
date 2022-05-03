@@ -45,11 +45,11 @@ class _StatsPageState extends State<StatsPage> {
       };
     } else {
       dataMap = {
-        "Food & Drinks": 0,
-        "Travel": 0,
-        "Shopping": 0,
-        "Gifts": 0,
-        "Others": 0,
+        "Food & Drinks": 1,
+        "Travel": 1,
+        "Shopping": 1,
+        "Gifts": 1,
+        "Others": 1,
       };
     }
   }
