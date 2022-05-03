@@ -16,22 +16,43 @@ class _StatsPageState extends State<StatsPage> {
 
   List<Expense>? expenseList = UserSimplePreferences.getExpenses();
 
-  late Map<String, double> dataMap = {
-    "Food & Drinks": expenseList
-        ?.where((e) => e.category == "Food & Drinks")
-        .toList()
-        .length as double,
-    "Travel": expenseList?.where((e) => e.category == "Travel").toList().length
-        as double,
-    "Shopping": expenseList
-        ?.where((e) => e.category == "Shopping")
-        .toList()
-        .length as double,
-    "Gifts": expenseList?.where((e) => e.category == "Gifts").toList().length
-        as double,
-    "Others": expenseList?.where((e) => e.category == "Others").toList().length
-        as double,
-  };
+  late Map<String, double> dataMap;
+
+  @override
+  void initState() {
+    if (expenseList != null) {
+      dataMap = {
+        "Food & Drinks": expenseList
+            ?.where((e) => e.category == "Food & Drinks")
+            .toList()
+            .length as double,
+        "Travel": expenseList
+            ?.where((e) => e.category == "Travel")
+            .toList()
+            .length as double,
+        "Shopping": expenseList
+            ?.where((e) => e.category == "Shopping")
+            .toList()
+            .length as double,
+        "Gifts": expenseList
+            ?.where((e) => e.category == "Gifts")
+            .toList()
+            .length as double,
+        "Others": expenseList
+            ?.where((e) => e.category == "Others")
+            .toList()
+            .length as double,
+      };
+    } else {
+      dataMap = {
+        "Food & Drinks": 0,
+        "Travel": 0,
+        "Shopping": 0,
+        "Gifts": 0,
+        "Others": 0,
+      };
+    }
+  }
 
   get floatingActionButton => null;
 
