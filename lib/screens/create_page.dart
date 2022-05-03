@@ -51,7 +51,7 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts'];
+  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts','Other'];
   String? value;
 
   TextEditingController amountController = TextEditingController(); //add class and object to store this variables
@@ -264,7 +264,7 @@ class MyCustomFormState extends State<MyCustomForm> {
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category: value);
+                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category:value);
                         Provider.of<MainExpenseList>(context,listen: false).changePageIndex(0);
                       }
                     },
