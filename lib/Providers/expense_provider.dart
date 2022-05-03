@@ -61,6 +61,7 @@ class MainExpenseList with ChangeNotifier {
   }
 
   void setRemaining() {
+    expenses = 0;
     for (int i = 0; i < _expense!.length; i++) {
       expenses += int.parse(_expense![i].amount);
     }
