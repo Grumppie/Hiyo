@@ -21,8 +21,12 @@ class Expense extends StatelessWidget {
       Icons.shopping_cart,
       color: Colors.white,
     ),
-    "Gifts":Icon(
+    "Gifts": Icon(
       Icons.card_giftcard_outlined,
+      color: Colors.white,
+    ),
+    "Other": Icon(
+      Icons.accessibility,
       color: Colors.white,
     )
   };
@@ -31,19 +35,24 @@ class Expense extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xff190933),
-        borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
+          color: Color(0xff190933),
+          borderRadius: BorderRadius.all(Radius.circular(20))),
       width: double.infinity,
       height: 76,
-      margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-      padding: EdgeInsets.symmetric(vertical: 18,horizontal: 18),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 18, horizontal: 18),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Center(child: categoryIcons[category]),
-          Text("$date",style: TextStyle(fontSize: 18,color: Colors.white),),
-          Text("$amount",style: TextStyle(fontSize: 18,color: Colors.white),),
+          Text(
+            "$date",
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+          Text(
+            "$amount",
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
         ],
       ),
     );

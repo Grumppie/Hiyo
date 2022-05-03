@@ -4,7 +4,7 @@ import 'package:hiyo/models/user.dart';
 import 'package:hiyo/widget.expense.dart';
 
 class MainExpenseList with ChangeNotifier {
-  List<Widget> _expense = [];
+  List<Expense>? _expense = [];
   num? limit;
   num expenses = 0;
   int currentPageIndex = 0;
@@ -22,7 +22,7 @@ class MainExpenseList with ChangeNotifier {
   //   return _auth.authStateChanges().map(_UserFromFirebaseUser);
   // }
 
-  List<Widget> getList() {
+  List<Expense>? getList() {
     return _expense;
   }
 
@@ -66,7 +66,7 @@ class MainExpenseList with ChangeNotifier {
   }
 
   void addExpenses({date, amount, category}) {
-    _expense.add(Expense(
+    _expense?.add(Expense(
       date: date,
       amount: amount,
       category: category,
@@ -79,5 +79,9 @@ class MainExpenseList with ChangeNotifier {
 
   void setLimit(newLimit) {
     limit = newLimit;
+  }
+
+  void setExpenseList(List<Expense> expenseList) {
+    _expense = expenseList;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiyo/screens/create_page.dart';
 import 'package:hiyo/services/auth.dart';
+import 'package:hiyo/utils/user_simple_preferences.dart';
 import 'package:hiyo/widget.expense.dart';
 import 'package:provider/provider.dart';
 import '../Providers/expense_provider.dart';
@@ -21,6 +22,19 @@ class _HomeState extends State<Home> {
   bool _isEnabled = false;
 
   // final AuthService _auth = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+    limit = UserSimplePreferences.getLimit() ?? '';
+    Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
+    List<Expense>? expenseList = UserSimplePreferences.getExpenses();
+    if (expenseList != null) {
+      Provider.of<MainExpenseList>(context, listen: false)
+          .setExpenseList(expenseList);
+    }
+    // print(expenseList?[0].amount);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +160,8 @@ class _HomeState extends State<Home> {
                           IconButton(
                             icon: Icon(Icons.save),
                             color: Colors.white,
-                            onPressed: () {
+                            onPressed: () async {
+                              await UserSimplePreferences.setLimit(limit);
                               setState(
                                 () {
                                   _isEnabled = false;
@@ -200,7 +215,7 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children:
                         Provider.of<MainExpenseList>(context, listen: true)
-                            .getList()
+                            .getList()!
                             .map((e) => e)
                             .toList(),
                   ),

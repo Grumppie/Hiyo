@@ -1,19 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hiyo/utils/user_simple_preferences.dart';
 import 'package:provider/provider.dart';
 import '../Providers/expense_provider.dart';
 
 class CreatePage extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-
         body: MyCustomForm(),
       ),
     );
@@ -22,7 +19,6 @@ class CreatePage extends StatelessWidget {
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-
   @override
   // 123504
   // 192.168.25.1:8090/httpclient.html
@@ -51,11 +47,13 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts','Other'];
+  final items = ['Food & Drinks', 'Travel', 'Shopping', 'Gifts', 'Other'];
   String? value;
 
-  TextEditingController amountController = TextEditingController(); //add class and object to store this variables
-  TextEditingController dateController = TextEditingController(); //store the terminal info in object
+  TextEditingController amountController =
+      TextEditingController(); //add class and object to store this variables
+  TextEditingController dateController =
+      TextEditingController(); //store the terminal info in object
 
   @override
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
@@ -82,7 +80,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             children: <Widget>[
               //Date
               Container(
-                margin: EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Text('Add Expense',
                       style: TextStyle(color: Colors.white, fontSize: 20))),
               Container(
@@ -101,7 +99,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                         margin: EdgeInsets.fromLTRB(10, 30, 50, 0),
                         child: TextFormField(
                           style: TextStyle(color: Colors.white),
-                          onTap: () async{
+                          onTap: () async {
                             DateTime? newDate = await showDatePicker(
                               context: context,
                               initialDate: selectedDate,
@@ -109,14 +107,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                               lastDate: DateTime(2100),
                             );
 
-                            if(newDate==null)return;
+                            if (newDate == null) return;
                             setState(() {
                               selectedDate = newDate;
                             });
                           },
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black, width: 3),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 3),
                             ),
                             // border: const OutlineInputBorder(),
                             // enabledBorder: OutlineInputBorder(
@@ -128,12 +127,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                               Icons.calendar_today_rounded,
                               color: Colors.white,
                             ),
-                            hintText: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                            hintText:
+                                '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                             hintStyle: TextStyle(color: Color(0xffffffff)),
-                            labelText: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                            labelText:
+                                '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
                             labelStyle: TextStyle(color: Color(0xff7b6f6f)),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black, width: 3),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 3),
                             ),
                             // focusedBorder: OutlineInputBorder(
                             //   borderRadius: BorderRadius.circular(5.0),
@@ -142,7 +144,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                             //   ),
                             // ),
                           ),
-
                         ),
                       ),
 
@@ -154,7 +155,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black, width: 3),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 3),
                             ),
                             // enabledBorder: OutlineInputBorder(
                             //     borderRadius: BorderRadius.circular(5.0),
@@ -171,7 +173,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                             labelText: 'Amount',
                             labelStyle: TextStyle(color: Color(0xff7b6f6f)),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black, width: 3),
+                              borderSide:
+                                  BorderSide(color: Colors.black, width: 3),
                             ),
                             // focusedBorder: OutlineInputBorder(
                             //   borderRadius: BorderRadius.circular(5.0),
@@ -258,14 +261,22 @@ class MyCustomFormState extends State<MyCustomForm> {
                         //side: BorderSide(color: Colors.red)
                       )),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       // print(dateController.text);
                       // print(amountController.text);
 
                       // It returns true if the form is valid, otherwise returns false
                       if (_formKey.currentState!.validate()) {
-                        context.read<MainExpenseList>().addExpenses(date: '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',amount: amountController.text,category:value);
-                        Provider.of<MainExpenseList>(context,listen: false).changePageIndex(0);
+                        context.read<MainExpenseList>().addExpenses(
+                            date:
+                                '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                            amount: amountController.text,
+                            category: value);
+                        await UserSimplePreferences.setExpenses(
+                            Provider.of<MainExpenseList>(context, listen: false)
+                                .getList());
+                        Provider.of<MainExpenseList>(context, listen: false)
+                            .changePageIndex(0);
                       }
                     },
                   ),

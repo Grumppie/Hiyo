@@ -7,6 +7,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:hiyo/screens/create_page.dart';
 import 'package:hiyo/screens/statistics/create_page.dart';
 import 'package:hiyo/services/auth.dart';
+import 'package:hiyo/utils/user_simple_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +15,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'models/user.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(
   //   options: FirebaseOptions(
   //     apiKey: "AIzaSyAPCbEzN9eC4wkwpvSBzZqDKtICDh2a1UA",
@@ -23,6 +24,9 @@ void main() async {
   //     projectId: "hiyo-49d6d",
   //   ),
   // );
+
+  await UserSimplePreferences.init();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => MainExpenseList()),
