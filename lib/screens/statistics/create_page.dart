@@ -89,173 +89,175 @@ class _StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff1d2473),
-      body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: //we rae saying htere are widgets inside this row
-              <Widget>[
-            Text(
-              'Track Daily Expenses',
-              style: TextStyle(
-                color: Colors.yellow,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.normal,
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Container(
-              //child:
-              child: PieChart(
-                dataMap: dataMap,
-                chartRadius: MediaQuery.of(context).size.width / 3,
-                chartType: ChartType.ring,
-                ringStrokeWidth: 32,
-                centerText: "spending",
-                legendOptions: const LegendOptions(
-                  legendShape: BoxShape.circle,
-                  legendPosition: LegendPosition.bottom,
-                  showLegends: true,
-                  showLegendsInRow: true,
-                  legendTextStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: //we rae saying htere are widgets inside this row
+                <Widget>[
+              Text(
+                'Track Daily Expenses',
+                style: TextStyle(
+                  color: Colors.yellow,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 20,
                 ),
-                chartValuesOptions: ChartValuesOptions(
-                    showChartValuesInPercentage: true,
-                    showChartValueBackground: true,
-                    showChartValuesOutside: true,
-                    showChartValues: true,
-                    chartValueStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 23, 22, 22),
-                    )),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.all(40),
-              padding: EdgeInsets.all(10.0),
-              child: Table(
-                  defaultColumnWidth: FixedColumnWidth(150.0),
-                  border: TableBorder.all(
+              SizedBox(
+                height: 60,
+              ),
+              Container(
+                //child:
+                child: PieChart(
+                  dataMap: dataMap,
+                  chartRadius: MediaQuery.of(context).size.width / 3,
+                  chartType: ChartType.ring,
+                  ringStrokeWidth: 32,
+                  centerText: "spending",
+                  legendOptions: const LegendOptions(
+                    legendShape: BoxShape.circle,
+                    legendPosition: LegendPosition.bottom,
+                    showLegends: true,
+                    showLegendsInRow: true,
+                    legendTextStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
                       color: Colors.white,
-                      style: BorderStyle.solid,
-                      width:
-                          1.5), // Allows to add a border decoration around your table
-                  children: [
-                    TableRow(children: [
-                      Text(
-                        'Category',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.yellowAccent),
-                      ),
-                      Text(
-                        'spent',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.yellowAccent),
-                      ),
+                    ),
+                  ),
+                  chartValuesOptions: ChartValuesOptions(
+                      showChartValuesInPercentage: true,
+                      showChartValueBackground: true,
+                      showChartValuesOutside: true,
+                      showChartValues: true,
+                      chartValueStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 23, 22, 22),
+                      )),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(40),
+                padding: EdgeInsets.all(10.0),
+                child: Table(
+                    defaultColumnWidth: FixedColumnWidth(150.0),
+                    border: TableBorder.all(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                        width:
+                            1.5), // Allows to add a border decoration around your table
+                    children: [
+                      TableRow(children: [
+                        Text(
+                          'Category',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellowAccent),
+                        ),
+                        Text(
+                          'spent',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellowAccent),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Text(
+                          'Food & Drinks',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${spentMap["Food & Drinks"]}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Text(
+                          'Travel',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${spentMap["Travel"]}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Text(
+                          'Shopping',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${spentMap["Shopping"]}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Text(
+                          'Gifts',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${spentMap["Gifts"]}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
+                      TableRow(children: [
+                        Text(
+                          'Others',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          '${spentMap["Others"]}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
                     ]),
-                    TableRow(children: [
-                      Text(
-                        'Food & Drinks',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        '${spentMap["Food & Drinks"]}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Text(
-                        'Travel',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        '${spentMap["Travel"]}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Text(
-                        'Shopping',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        '${spentMap["Shopping"]}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Text(
-                        'Gifts',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        '${spentMap["Gifts"]}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ]),
-                    TableRow(children: [
-                      Text(
-                        'Others',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        '${spentMap["Others"]}',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ]),
-                  ]),
-            )
-          ]),
+              )
+            ]),
+      ),
     );
   }
 }
