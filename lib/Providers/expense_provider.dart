@@ -92,4 +92,9 @@ class MainExpenseList with ChangeNotifier {
     _expense = expenseList;
     notifyListeners();
   }
+
+  void emptyExpenseList() {
+    _expense = [];
+    notifyListeners();
+  }
 }

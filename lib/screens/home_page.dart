@@ -167,12 +167,13 @@ class _HomeState extends State<Home> {
                             color: Colors.white,
                             onPressed: () async {
                               await UserSimplePreferences.setLimit(limit);
+
+                              Provider.of<MainExpenseList>(context,
+                                      listen: false)
+                                  .changeMyLimit(limit);
                               setState(
                                 () {
                                   _isEnabled = false;
-                                  Provider.of<MainExpenseList>(context,
-                                          listen: false)
-                                      .changeMyLimit(limit);
                                 },
                               );
                             },
@@ -216,6 +217,13 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 12,
                 ),
+                // IconButton(
+                //   icon: Icon(Icons.delete),
+                //   color: Colors.white,
+                //   onPressed: () async {
+                //     await UserSimplePreferences.emptyExpenses();
+                //   },
+                // ),
                 SingleChildScrollView(
                   child: Column(
                     children:

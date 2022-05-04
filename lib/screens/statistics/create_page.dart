@@ -47,6 +47,40 @@ class _StatsPageState extends State<StatsPage> {
           "Others": 0,
         };
 
+  dynamic findTotal(List<Expense>? list) {
+    int sum = 0;
+    for (int i = 0; i < list!.length; i++) {
+      sum += int.parse(list[i].amount);
+    }
+    return sum;
+  }
+
+  late Map<String, double> spentMap = (expenseList != null)
+      ? {
+          "Food & Drinks": findTotal(expenseList
+              ?.where((e) => e.category == "Food & Drinks")
+              .toList()) as double,
+          "Travel": findTotal(
+                  expenseList?.where((e) => e.category == "Travel").toList())
+              as double,
+          "Shopping": findTotal(
+                  expenseList?.where((e) => e.category == "Shopping").toList())
+              as double,
+          "Gifts": findTotal(
+                  expenseList?.where((e) => e.category == "Gifts").toList())
+              as double,
+          "Others": findTotal(
+                  expenseList?.where((e) => e.category == "Others").toList())
+              as double,
+        }
+      : {
+          "Food & Drinks": 0,
+          "Travel": 0,
+          "Shopping": 0,
+          "Gifts": 0,
+          "Others": 0,
+        };
+
   get floatingActionButton => null;
 
   get floatingActionButtonLocation => null;
@@ -131,7 +165,7 @@ class _StatsPageState extends State<StatsPage> {
                     ]),
                     TableRow(children: [
                       Text(
-                        'Shopping',
+                        'Food & Drinks',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15.0,
@@ -139,7 +173,7 @@ class _StatsPageState extends State<StatsPage> {
                             color: Colors.white),
                       ),
                       Text(
-                        '66',
+                        '${spentMap["Food & Drinks"]}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15.0,
@@ -157,7 +191,61 @@ class _StatsPageState extends State<StatsPage> {
                             color: Colors.white),
                       ),
                       Text(
-                        '200',
+                        '${spentMap["Travel"]}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ]),
+                    TableRow(children: [
+                      Text(
+                        'Shopping',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        '${spentMap["Shopping"]}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ]),
+                    TableRow(children: [
+                      Text(
+                        'Gifts',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        '${spentMap["Gifts"]}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ]),
+                    TableRow(children: [
+                      Text(
+                        'Others',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        '${spentMap["Others"]}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 15.0,

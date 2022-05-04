@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:hiyo/Providers/expense_provider.dart';
 import 'package:hiyo/widget.expense.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
@@ -20,6 +22,10 @@ class UserSimplePreferences {
         expenseList?.map((e) => '${e.category}_${e.date}_${e.amount}').toList();
     storageList?.map((s) => print(s));
     await _preference?.setStringList('ExpenseList', storageList!);
+  }
+
+  static Future emptyExpenses() async {
+    await _preference?.setStringList('ExpenseList', []);
   }
 
   static List<Expense>? getExpenses() {

@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> {
         }
       case 2:
         {
-          return Center(child: Text("My Transactions"));
+          return Center(child: Text("Statistics"));
         }
     }
   }
