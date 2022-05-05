@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hiyo/screens/create_page.dart';
@@ -6,6 +8,33 @@ import 'package:hiyo/utils/user_simple_preferences.dart';
 import 'package:hiyo/widget.expense.dart';
 import 'package:provider/provider.dart';
 import '../Providers/expense_provider.dart';
+
+import 'package:http/http.dart' as http;
+
+Future<Album> fetchAlbum() async {
+  final response =
+      await http.get(Uri.parse('http://localhost:4000/transactions'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
+class Album {
+  final List<dynamic> data;
+
+  const Album({required this.data});
+
+  factory Album.fromJson(List<dynamic> json) {
+    return Album(data: json.toList());
+  }
+}
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,9 +52,12 @@ class _HomeState extends State<Home> {
 
   // final AuthService _auth = AuthService();
 
+  late Future<Album> futureAlbum;
   @override
   void initState() {
     super.initState();
+    futureAlbum = fetchAlbum();
+    print(futureAlbum);
     limit = UserSimplePreferences.getLimit() ?? '';
     Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
     List<Expense>? expenseList = UserSimplePreferences.getExpenses();
@@ -206,13 +238,35 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 12,
                 ),
-                Text(
-                  "My Transactions",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 0),
+                      child: Text(
+                        "My Transactions",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 0),
+                      child: IconButton(
+                        icon: Icon(Icons.edit),
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(
+                            () {},
+                          );
+                        },
+                      ),
+                    )
+                  ],
                 ),
                 SizedBox(
                   height: 12,
@@ -224,14 +278,44 @@ class _HomeState extends State<Home> {
                 //     await UserSimplePreferences.emptyExpenses();
                 //   },
                 // ),
-                SingleChildScrollView(
-                  child: Column(
-                    children:
-                        Provider.of<MainExpenseList>(context, listen: true)
-                            .getList()!
-                            .map((e) => e)
-                            .toList(),
-                  ),
+                // SingleChildScrollView(
+                //   child: Column(
+                //     children:
+                //         Provider.of<MainExpenseList>(context, listen: true)
+                //             .getList()!
+                //             .map((e) => e)
+                //             .toList(),
+                //   ),
+                // ),
+                FutureBuilder<Album>(
+                  future: futureAlbum,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Expense> expenseList = snapshot.data!.data
+                          .map((e) => Expense(
+                              amount: e['amount'],
+                              category: e['category'],
+                              date: e['date']))
+                          .toList();
+                      Provider.of<MainExpenseList>(context, listen: true)
+                          .setExpenseList(expenseList);
+                      UserSimplePreferences.setExpenses(expenseList);
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: Provider.of<MainExpenseList>(context,
+                                  listen: true)
+                              .getList()!
+                              .map((e) => e)
+                              .toList(),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}',
+                          style: TextStyle(color: Colors.white));
+                    }
+                    // By default, show a loading spinner.
+                    return const CircularProgressIndicator();
+                  },
                 ),
               ],
             ),

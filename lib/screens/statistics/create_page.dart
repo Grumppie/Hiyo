@@ -254,6 +254,24 @@ class _StatsPageState extends State<StatsPage> {
                               color: Colors.white),
                         ),
                       ]),
+                      TableRow(children: [
+                        Text(
+                          'total',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellowAccent),
+                        ),
+                        Text(
+                          '${(spentMap["Others"]!+spentMap["Gifts"]!+spentMap["Shopping"]!+spentMap["Travel"]!+spentMap["Food & Drinks"]!) as num}',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                      ]),
                     ]),
               )
             ]),

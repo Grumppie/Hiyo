@@ -25,7 +25,7 @@ class Expense extends StatelessWidget {
       Icons.card_giftcard_outlined,
       color: Colors.white,
     ),
-    "Other": Icon(
+    "Others": Icon(
       Icons.accessibility,
       color: Colors.white,
     )
