@@ -1,9 +1,46 @@
+import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hiyo/utils/user_simple_preferences.dart';
+import 'package:hiyo/widget.expense.dart';
 import 'package:provider/provider.dart';
 import '../Providers/expense_provider.dart';
+import 'package:http/http.dart' as http;
+
+Future<Album> createAlbum(Expense expense) async {
+  final response = await http.post(
+    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      "category": expense.category.toString(),
+      "amount": expense.amount.toString(),
+      "date": expense.date.toString(),
+    }),
+  );
+
+  if (response.statusCode == 201) {
+    // If the server did return a 201 CREATED response,
+    // then parse the JSON.
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to create album.');
+  }
+}
+
+class Album {
+  final List<dynamic> data;
+
+  const Album({required this.data});
+
+  factory Album.fromJson(List<dynamic> json) {
+    return Album(data: json.toList());
+  }
+}
 
 class CreatePage extends StatelessWidget {
   @override
@@ -54,6 +91,8 @@ class MyCustomFormState extends State<MyCustomForm> {
       TextEditingController(); //add class and object to store this variables
   TextEditingController dateController =
       TextEditingController(); //store the terminal info in object
+
+  Future<Album>? _futureAlbum;
 
   @override
   DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
@@ -277,6 +316,11 @@ class MyCustomFormState extends State<MyCustomForm> {
                                 .getList());
                         Provider.of<MainExpenseList>(context, listen: false)
                             .changePageIndex(0);
+                        // _futureAlbum = createAlbum(Expense(
+                        //     date:
+                        //         '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                        //     amount: amountController.text,
+                        //     category: value));
                       }
                     },
                   ),

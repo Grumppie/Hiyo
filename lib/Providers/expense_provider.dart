@@ -9,6 +9,15 @@ class MainExpenseList with ChangeNotifier {
   num expenses = 0;
   int currentPageIndex = 0;
   dynamic _Mylimit;
+  bool New = true;
+
+  void toggleNew() {
+    New = !New;
+  }
+
+  bool getNew() {
+    return New;
+  }
 
   AppUser _UserFromFirebaseUser(User? user) {
     return AppUser(uid: user?.uid);

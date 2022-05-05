@@ -73,6 +73,8 @@ class _HomeState extends State<Home> {
     // print(expenseList?[0].amount);
   }
 
+  bool New = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -278,29 +280,43 @@ class _HomeState extends State<Home> {
                 //     await UserSimplePreferences.emptyExpenses();
                 //   },
                 // ),
-                // SingleChildScrollView(
-                //   child: Column(
-                //     children:
-                //         Provider.of<MainExpenseList>(context, listen: true)
-                //             .getList()!
-                //             .map((e) => e)
-                //             .toList(),
-                //   ),
-                // ),
-                FutureBuilder<Album>(
-                  future: futureAlbum,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      List<Expense> expenseList = snapshot.data!.data
-                          .map((e) => Expense(
-                              amount: e['amount'],
-                              category: e['category'],
-                              date: e['date']))
-                          .toList();
-                      Provider.of<MainExpenseList>(context, listen: true)
-                          .setExpenseList(expenseList);
-                      UserSimplePreferences.setExpenses(expenseList);
-                      return SingleChildScrollView(
+                (Provider.of<MainExpenseList>(context, listen: true).getNew() ==
+                        true)
+                    ? FutureBuilder<Album>(
+                        future: futureAlbum,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List<Expense> expenseList = snapshot.data!.data
+                                .map((e) => Expense(
+                                    amount: e['amount'],
+                                    category: e['category'],
+                                    date: e['date']))
+                                .toList();
+
+                            Provider.of<MainExpenseList>(context, listen: true)
+                                .setExpenseList(expenseList);
+                            Provider.of<MainExpenseList>(context, listen: true)
+                                .toggleNew();
+
+                            UserSimplePreferences.setExpenses(expenseList);
+                            return SingleChildScrollView(
+                              child: Column(
+                                children: Provider.of<MainExpenseList>(context,
+                                        listen: true)
+                                    .getList()!
+                                    .map((e) => e)
+                                    .toList(),
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text('${snapshot.error}',
+                                style: TextStyle(color: Colors.white));
+                          }
+                          // By default, show a loading spinner.
+                          return const CircularProgressIndicator();
+                        },
+                      )
+                    : SingleChildScrollView(
                         child: Column(
                           children: Provider.of<MainExpenseList>(context,
                                   listen: true)
@@ -308,15 +324,7 @@ class _HomeState extends State<Home> {
                               .map((e) => e)
                               .toList(),
                         ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}',
-                          style: TextStyle(color: Colors.white));
-                    }
-                    // By default, show a loading spinner.
-                    return const CircularProgressIndicator();
-                  },
-                ),
+                      ),
               ],
             ),
           )),
