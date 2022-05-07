@@ -11,30 +11,30 @@ import '../Providers/expense_provider.dart';
 
 import 'package:http/http.dart' as http;
 
-Future<Album> fetchAlbum() async {
-  final response =
-      await http.get(Uri.parse('http://localhost:4000/transactions'));
+// Future<Album> fetchAlbum() async {
+//   final response =
+//       await http.get(Uri.parse('http://localhost:4000/transactions'));
 
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}
+//   if (response.statusCode == 200) {
+//     // If the server did return a 200 OK response,
+//     // then parse the JSON.
+//     return Album.fromJson(jsonDecode(response.body));
+//   } else {
+//     // If the server did not return a 200 OK response,
+//     // then throw an exception.
+//     throw Exception('Failed to load album');
+//   }
+// }
 
-class Album {
-  final List<dynamic> data;
+// class Album {
+//   final List<dynamic> data;
 
-  const Album({required this.data});
+//   const Album({required this.data});
 
-  factory Album.fromJson(List<dynamic> json) {
-    return Album(data: json.toList());
-  }
-}
+//   factory Album.fromJson(List<dynamic> json) {
+//     return Album(data: json.toList());
+//   }
+// }
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -46,6 +46,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String limit = "";
   num remaining = 0;
+  List<Expense>? expenseList;
 
   TextEditingController _limitController = TextEditingController();
   bool _isEnabled = false;
@@ -56,21 +57,24 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
-    print(futureAlbum);
+    // futureAlbum = fetchAlbum();
+    // print(futureAlbum);
     limit = UserSimplePreferences.getLimit() ?? '';
-    Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
-    List<Expense>? expenseList = UserSimplePreferences.getExpenses();
+    expenseList = UserSimplePreferences.getExpenses();
+    // print(expenseList?[0].amount);
+    WidgetsBinding.instance!.addPostFrameCallback((_) => updateState());
+  }
+
+  void updateState() {
     if (expenseList != null) {
       Provider.of<MainExpenseList>(context, listen: false)
-          .setExpenseList(expenseList);
+          .setExpenseList(expenseList!);
       // for (int i = 0; i < expenseList.length; i++) {
       //   remaining += expenseList[i].amount as num;
       // }
       Provider.of<MainExpenseList>(context, listen: false).setRemaining();
     }
-
-    // print(expenseList?[0].amount);
+    Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
   }
 
   bool New = true;
@@ -280,51 +284,15 @@ class _HomeState extends State<Home> {
                 //     await UserSimplePreferences.emptyExpenses();
                 //   },
                 // ),
-                (Provider.of<MainExpenseList>(context, listen: true).getNew() ==
-                        true)
-                    ? FutureBuilder<Album>(
-                        future: futureAlbum,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            List<Expense> expenseList = snapshot.data!.data
-                                .map((e) => Expense(
-                                    amount: e['amount'],
-                                    category: e['category'],
-                                    date: e['date']))
-                                .toList();
-
-                            Provider.of<MainExpenseList>(context, listen: true)
-                                .setExpenseList(expenseList);
-                            Provider.of<MainExpenseList>(context, listen: true)
-                                .toggleNew();
-
-                            UserSimplePreferences.setExpenses(expenseList);
-                            return SingleChildScrollView(
-                              child: Column(
-                                children: Provider.of<MainExpenseList>(context,
-                                        listen: true)
-                                    .getList()!
-                                    .map((e) => e)
-                                    .toList(),
-                              ),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}',
-                                style: TextStyle(color: Colors.white));
-                          }
-                          // By default, show a loading spinner.
-                          return const CircularProgressIndicator();
-                        },
-                      )
-                    : SingleChildScrollView(
-                        child: Column(
-                          children: Provider.of<MainExpenseList>(context,
-                                  listen: true)
-                              .getList()!
-                              .map((e) => e)
-                              .toList(),
-                        ),
-                      ),
+                SingleChildScrollView(
+                  child: Column(
+                    children:
+                        Provider.of<MainExpenseList>(context, listen: true)
+                            .getList()!
+                            .map((e) => e)
+                            .toList(),
+                  ),
+                ),
               ],
             ),
           )),

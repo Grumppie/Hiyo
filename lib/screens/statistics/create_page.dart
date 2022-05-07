@@ -16,41 +16,38 @@ class _StatsPageState extends State<StatsPage> {
 
   List<Expense>? expenseList = UserSimplePreferences.getExpenses();
 
+  double findLength(List list) {
+    double length = 0;
+    length += list.length;
+    return length;
+  }
+
   late Map<String, double> dataMap = (expenseList != null)
       ? {
-          "Food & Drinks": expenseList
-              ?.where((e) => e.category == "Food & Drinks")
-              .toList()
-              .length as double,
-          "Travel": expenseList
-              ?.where((e) => e.category == "Travel")
-              .toList()
-              .length as double,
-          "Shopping": expenseList
-              ?.where((e) => e.category == "Shopping")
-              .toList()
-              .length as double,
-          "Gifts": expenseList
-              ?.where((e) => e.category == "Gifts")
-              .toList()
-              .length as double,
-          "Others": expenseList
-              ?.where((e) => e.category == "Others")
-              .toList()
-              .length as double,
+          "Food & Drinks": findLength(expenseList!
+              .where((e) => e.category == "Food & Drinks")
+              .toList()),
+          "Travel": findLength(
+              expenseList!.where((e) => e.category == "Travel").toList()),
+          "Shopping": findLength(
+              expenseList!.where((e) => e.category == "Shopping").toList()),
+          "Gifts": findLength(
+              expenseList!.where((e) => e.category == "Gifts").toList()),
+          "Others": findLength(
+              expenseList!.where((e) => e.category == "Others").toList()),
         }
       : {
-          "Food & Drinks": 0,
-          "Travel": 0,
-          "Shopping": 0,
-          "Gifts": 0,
-          "Others": 0,
+          "Food & Drinks": 0.0,
+          "Travel": 0.0,
+          "Shopping": 0.0,
+          "Gifts": 0.0,
+          "Others": 0.0,
         };
 
   dynamic findTotal(List<Expense>? list) {
-    int sum = 0;
+    double sum = 0;
     for (int i = 0; i < list!.length; i++) {
-      sum += int.parse(list[i].amount);
+      sum += double.parse(list[i].amount);
     }
     return sum;
   }
@@ -109,7 +106,7 @@ class _StatsPageState extends State<StatsPage> {
               Container(
                 //child:
                 child: PieChart(
-                  dataMap: dataMap,
+                  dataMap: dataMap as Map<String, double>,
                   chartRadius: MediaQuery.of(context).size.width / 3,
                   chartType: ChartType.ring,
                   ringStrokeWidth: 32,
@@ -264,7 +261,7 @@ class _StatsPageState extends State<StatsPage> {
                               color: Colors.yellowAccent),
                         ),
                         Text(
-                          '${(spentMap["Others"]!+spentMap["Gifts"]!+spentMap["Shopping"]!+spentMap["Travel"]!+spentMap["Food & Drinks"]!) as num}',
+                          '${(spentMap["Others"]! + spentMap["Gifts"]! + spentMap["Shopping"]! + spentMap["Travel"]! + spentMap["Food & Drinks"]!) as double}',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 15.0,
