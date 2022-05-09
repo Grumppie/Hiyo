@@ -219,22 +219,64 @@ class _HomeState extends State<Home> {
                       SizedBox(
                         height: 5,
                       ),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Spent:",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.normal),
-                          )),
-                      Text(
-                        "${Provider.of<MainExpenseList>(context, listen: true).getRemaining()}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            height: 1.2,
-                            fontWeight: FontWeight.bold),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "Spent:",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "${Provider.of<MainExpenseList>(context, listen: true).getRemaining()}",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                    height: 1.2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "Remaining:",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "${int.parse(limit) - Provider.of<MainExpenseList>(context, listen: true).getRemaining()}",
+                                style: TextStyle(
+                                    color: (int.parse(limit) -
+                                                Provider.of<MainExpenseList>(
+                                                        context,
+                                                        listen: true)
+                                                    .getRemaining() >
+                                            0)
+                                        ? Colors.greenAccent
+                                        : Colors.redAccent,
+                                    fontSize: 25.0,
+                                    height: 1.2,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
