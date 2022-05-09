@@ -168,9 +168,7 @@ class _HomeState extends State<Home> {
                               fillColor: Colors.lightBlueAccent,
                               focusColor: Colors.lightBlueAccent,
                             ),
-                            initialValue: Provider.of<MainExpenseList>(context,
-                                    listen: true)
-                                .getMyLimit(),
+                            initialValue: limit,
                             // controller: Provider.of<MainExpenseList>(context,
                             //         listen: true)
                             //     .getMyLimit(),
