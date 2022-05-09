@@ -24,17 +24,28 @@ class _StatsPageState extends State<StatsPage> {
 
   late Map<String, double> dataMap = (expenseList != null)
       ? {
-          "Food & Drinks": findLength(expenseList!
-              .where((e) => e.category == "Food & Drinks")
-              .toList()),
-          "Travel": findLength(
-              expenseList!.where((e) => e.category == "Travel").toList()),
-          "Shopping": findLength(
-              expenseList!.where((e) => e.category == "Shopping").toList()),
-          "Gifts": findLength(
-              expenseList!.where((e) => e.category == "Gifts").toList()),
-          "Others": findLength(
-              expenseList!.where((e) => e.category == "Others").toList()),
+          "Food & Drinks": findTotal(expenseList
+                  ?.where((e) => e.category == "Food & Drinks")
+                  .toList()) /
+              findTotal(expenseList) *
+              100,
+          "Travel": findTotal(
+                  expenseList?.where((e) => e.category == "Travel").toList()) /
+              findTotal(expenseList) *
+              100,
+          "Shopping": findTotal(expenseList
+                  ?.where((e) => e.category == "Shopping")
+                  .toList()) /
+              findTotal(expenseList) *
+              100,
+          "Gifts": findTotal(
+                  expenseList?.where((e) => e.category == "Gifts").toList()) /
+              findTotal(expenseList) *
+              100,
+          "Others": findTotal(
+                  expenseList?.where((e) => e.category == "Others").toList()) /
+              findTotal(expenseList) *
+              100,
         }
       : {
           "Food & Drinks": 0.0,
