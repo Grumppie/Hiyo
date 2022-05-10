@@ -148,28 +148,33 @@ class _MyAppState extends State<MyApp> {
                 ? Screens[Provider.of<MainExpenseList>(context, listen: true)
                     .getPageIndex()]
                 : SignIn(),
-            bottomNavigationBar: Theme(
-              data: Theme.of(context)
-                  .copyWith(iconTheme: IconThemeData(color: Colors.white)),
-              child: CurvedNavigationBar(
-                color: Color(0xff190933),
-                backgroundColor: Colors.transparent,
-                buttonBackgroundColor: buttonColor(
-                    Provider.of<MainExpenseList>(context, listen: true)
-                        .getPageIndex()),
-                height: 70,
-                animationCurve: Curves.easeInOut,
-                animationDuration: Duration(milliseconds: 300),
-                index: Provider.of<MainExpenseList>(context, listen: true)
-                    .getPageIndex(),
-                items: items,
-                onTap: (index) => setState(() => {
-                      Provider.of<MainExpenseList>(context, listen: false)
-                          .changePageIndex(index),
-                      // print(index)
-                    }),
-              ),
-            ),
+            bottomNavigationBar: (Provider.of<MainExpenseList>(context,
+                            listen: true)
+                        .getLogged() ==
+                    true)
+                ? Theme(
+                    data: Theme.of(context).copyWith(
+                        iconTheme: IconThemeData(color: Colors.white)),
+                    child: CurvedNavigationBar(
+                      color: Color(0xff190933),
+                      backgroundColor: Colors.transparent,
+                      buttonBackgroundColor: buttonColor(
+                          Provider.of<MainExpenseList>(context, listen: true)
+                              .getPageIndex()),
+                      height: 70,
+                      animationCurve: Curves.easeInOut,
+                      animationDuration: Duration(milliseconds: 300),
+                      index: Provider.of<MainExpenseList>(context, listen: true)
+                          .getPageIndex(),
+                      items: items,
+                      onTap: (index) => setState(() => {
+                            Provider.of<MainExpenseList>(context, listen: false)
+                                .changePageIndex(index),
+                            // print(index)
+                          }),
+                    ),
+                  )
+                : Container(height: 0),
           ),
         ),
       ),
