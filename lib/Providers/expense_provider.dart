@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hiyo/models/user.dart';
+import 'package:hiyo/utils/user_simple_preferences.dart';
 import 'package:hiyo/widget.expense.dart';
 
 class MainExpenseList with ChangeNotifier {
@@ -10,6 +11,49 @@ class MainExpenseList with ChangeNotifier {
   int currentPageIndex = 0;
   dynamic _Mylimit;
   bool New = true;
+
+  String name = "", email = "", password = "";
+
+  bool logged = false;
+
+  bool getLogged() {
+    return logged;
+  }
+
+  void toggleLogged(bool log) {
+    logged = log;
+    UserSimplePreferences.setLogged(logged);
+    notifyListeners();
+  }
+
+  void setUserName(name) {
+    this.name = name;
+    notifyListeners();
+  }
+
+  void setUserEmail(email) {
+    this.email = email;
+    UserSimplePreferences.userEmail(email);
+    notifyListeners();
+  }
+
+  void setUserPassword(password) {
+    this.password = password;
+    UserSimplePreferences.userPass(password);
+    notifyListeners();
+  }
+
+  String getUserName() {
+    return name;
+  }
+
+  String getUserEmail() {
+    return email;
+  }
+
+  String getUserPassword() {
+    return password;
+  }
 
   void toggleNew() {
     New = !New;

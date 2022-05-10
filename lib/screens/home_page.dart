@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
   String limit = "";
   num remaining = 0;
   List<Expense>? expenseList;
-
+  String? email = '';
   TextEditingController _limitController = TextEditingController();
   bool _isEnabled = false;
 
@@ -75,6 +75,8 @@ class _HomeState extends State<Home> {
       Provider.of<MainExpenseList>(context, listen: false).setRemaining();
     }
     Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
+    remaining = int.parse(limit) -
+        Provider.of<MainExpenseList>(context, listen: true).getRemaining();
   }
 
   bool New = true;
@@ -111,7 +113,7 @@ class _HomeState extends State<Home> {
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
                             Text(
-                              "unknown user ",
+                              "${UserSimplePreferences.getUser() != null ? UserSimplePreferences.getUser() : "Unknown User"}",
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             )
@@ -306,9 +308,8 @@ class _HomeState extends State<Home> {
                         icon: Icon(Icons.edit),
                         color: Colors.white,
                         onPressed: () {
-                          setState(
-                            () {},
-                          );
+                          Provider.of<MainExpenseList>(context, listen: false)
+                              .toggleLogged(false);
                         },
                       ),
                     )

@@ -39,4 +39,23 @@ class UserSimplePreferences {
         .toList();
     return expenseList;
   }
+
+  static const _Email = "email", _Pass = "password";
+  static Future userEmail(email) async {
+    await _preference?.setString(_Email, email);
+  }
+
+  static String? getUser() => _preference?.getString(_Email);
+
+  static Future userPass(pass) async {
+    await _preference?.setString(_Pass, pass);
+  }
+
+  static String? getPass() => _preference?.getString(_Pass);
+
+  static Future setLogged(bool log) async {
+    await _preference?.setString("log", log.toString());
+  }
+
+  static String? getLogged() => _preference?.getString("log");
 }

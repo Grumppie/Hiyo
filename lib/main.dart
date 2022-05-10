@@ -104,6 +104,23 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  late bool logged;
+
+  @override
+  void initState() {
+    super.initState();
+    logged = (UserSimplePreferences.getLogged() == "true") ? true : false;
+    WidgetsBinding.instance!.addPostFrameCallback((_) => updateState());
+  }
+
+  void updateState() {
+    if (logged) {
+      Provider.of<MainExpenseList>(context, listen: false).toggleLogged(true);
+    } else {
+      Provider.of<MainExpenseList>(context, listen: false).toggleLogged(false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -114,15 +131,23 @@ class _MyAppState extends State<MyApp> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
-              title: PageTitle(
-                  Provider.of<MainExpenseList>(context, listen: true)
-                      .getPageIndex()),
+              title: (Provider.of<MainExpenseList>(context, listen: true)
+                          .getLogged() ==
+                      true)
+                  ? (PageTitle(
+                      Provider.of<MainExpenseList>(context, listen: true)
+                          .getPageIndex()))
+                  : Center(child: Text("Authentication")),
               backgroundColor: Color(0xff190947), //0xff190933
             ),
             extendBody: true,
             backgroundColor: Color(0xff1d2473),
-            body: Screens[Provider.of<MainExpenseList>(context, listen: true)
-                .getPageIndex()],
+            body: (Provider.of<MainExpenseList>(context, listen: true)
+                        .getLogged() ==
+                    true)
+                ? Screens[Provider.of<MainExpenseList>(context, listen: true)
+                    .getPageIndex()]
+                : SignIn(),
             bottomNavigationBar: Theme(
               data: Theme.of(context)
                   .copyWith(iconTheme: IconThemeData(color: Colors.white)),
