@@ -118,6 +118,7 @@ class MainExpenseList with ChangeNotifier {
     for (int i = 0; i < _expense!.length; i++) {
       expenses += int.parse(_expense![i].amount);
     }
+    notifyListeners();
   }
 
   void changePageIndex(int newIndex) {
@@ -148,6 +149,8 @@ class MainExpenseList with ChangeNotifier {
 
   void emptyExpenseList() {
     _expense = [];
+    UserSimplePreferences.clearData();
+    setRemaining();
     notifyListeners();
   }
 }

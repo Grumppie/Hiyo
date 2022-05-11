@@ -65,6 +65,7 @@ class _HomeState extends State<Home> {
     WidgetsBinding.instance!.addPostFrameCallback((_) => updateState());
   }
 
+  late num actuallyRemaining;
   void updateState() {
     if (expenseList != null) {
       Provider.of<MainExpenseList>(context, listen: false)
@@ -75,8 +76,6 @@ class _HomeState extends State<Home> {
       Provider.of<MainExpenseList>(context, listen: false).setRemaining();
     }
     Provider.of<MainExpenseList>(context, listen: false).changeMyLimit(limit);
-    remaining = int.parse(limit) -
-        Provider.of<MainExpenseList>(context, listen: true).getRemaining();
   }
 
   bool New = true;
@@ -259,13 +258,15 @@ class _HomeState extends State<Home> {
                                 height: 5,
                               ),
                               Text(
-                                "${int.parse(limit) - Provider.of<MainExpenseList>(context, listen: true).getRemaining()}",
+                                "${(limit != "") ? int.parse(limit) - Provider.of<MainExpenseList>(context, listen: true).getRemaining() : 0}",
                                 style: TextStyle(
-                                    color: (int.parse(limit) -
-                                                Provider.of<MainExpenseList>(
-                                                        context,
-                                                        listen: true)
-                                                    .getRemaining() >
+                                    color: (((limit != "")
+                                                ? int.parse(limit) -
+                                                    Provider.of<MainExpenseList>(
+                                                            context,
+                                                            listen: true)
+                                                        .getRemaining()
+                                                : 0) >
                                             0)
                                         ? Colors.greenAccent
                                         : Colors.redAccent,
@@ -301,17 +302,35 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 32, vertical: 0),
-                      child: IconButton(
-                        icon: Icon(Icons.edit),
-                        color: Colors.white,
-                        onPressed: () {
-                          Provider.of<MainExpenseList>(context, listen: false)
-                              .toggleLogged(false);
-                        },
-                      ),
+                    Row(
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                          child: IconButton(
+                            icon: Icon(Icons.logout),
+                            color: Colors.white,
+                            onPressed: () {
+                              Provider.of<MainExpenseList>(context,
+                                      listen: false)
+                                  .toggleLogged(false);
+                            },
+                          ),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                          child: IconButton(
+                            icon: Icon(Icons.delete),
+                            color: Colors.white,
+                            onPressed: () {
+                              Provider.of<MainExpenseList>(context,
+                                      listen: false)
+                                  .emptyExpenseList();
+                            },
+                          ),
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -330,7 +349,7 @@ class _HomeState extends State<Home> {
                     children:
                         Provider.of<MainExpenseList>(context, listen: true)
                             .getList()!
-                            .map((e) => e)
+                            .reversed
                             .toList(),
                   ),
                 ),

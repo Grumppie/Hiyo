@@ -58,4 +58,8 @@ class UserSimplePreferences {
   }
 
   static String? getLogged() => _preference?.getString("log");
+
+  static void clearData() async {
+    await _preference?.remove('ExpenseList');
+  }
 }
