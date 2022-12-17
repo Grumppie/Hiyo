@@ -1,6 +1,6 @@
 
 ## HIYŌ
-# Expense Managment Moblile Application.
+# Expense Management Moblile Application.
 
 ## Tech Stack
 
